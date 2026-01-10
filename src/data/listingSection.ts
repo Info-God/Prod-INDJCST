@@ -21,6 +21,7 @@ export const policies = [
   { title: "Copyright, Grants and Ownership Declaration", link: "/ethics?target=copyright-ownership" },
   { title: "Open Access Policy", link: "/ethics?target=open-access-policy" },
   { title: "Cross mark Policy", link: "/cross-mark-policy" },
+  { title: "Ai policies", link: "/ai-policies" },
   { title: "Contact Us", link: "/contact-us" }
 ];
 

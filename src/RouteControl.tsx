@@ -32,6 +32,7 @@ const About = React.lazy(() => import("./ui/endpoints/about/About"));
 const IndexAbstract = React.lazy(() => import("./ui/endpoints/indexing&abstract/IndexAbstract"));
 const PeerReviewPolicy = React.lazy(() => import("./ui/endpoints/about/PeerReview/PeerReviewPolicy"));
 const CrossMarkPolicy = React.lazy(() => import("./ui/endpoints/about/crossmark/CrossMarkPolicy"));
+const AiPolicies=React.lazy(()=> import ( "./ui/endpoints/about/aipolicies/AiPolicies"))
 const PublicationPolicy = React.lazy(() => import("./ui/endpoints/about/publication-policy/PublicationPolicy"));
 const ImactFactor = React.lazy(() => import("./ui/endpoints/about/Impact/ImactFactor"));
 const FAQ = React.lazy(() => import("./ui/endpoints/about/FAQ/FAQ"));
@@ -152,6 +153,7 @@ export default function RouteControl() {
             <Route path="/peer-review-policy" element={<MetaDataWrapper><PeerReviewPolicy /></MetaDataWrapper>} />
             <Route path="/ethics" element={<MetaDataWrapper><EthicsAndPolicy /></MetaDataWrapper>} />
             <Route path="/cross-mark-policy" element={<MetaDataWrapper><CrossMarkPolicy /></MetaDataWrapper>} />
+            <Route path="/ai-policies" element={<MetaDataWrapper><AiPolicies/></MetaDataWrapper>} />
             <Route path="/impact-Factor" element={<MetaDataWrapper><ImactFactor /></MetaDataWrapper>} />
             <Route path="/FAQs" element={<MetaDataWrapper><FAQ /></MetaDataWrapper>} />
             <Route path="/journal-particulars" element={<MetaDataWrapper><JournalParticularsContainer /></MetaDataWrapper>} />

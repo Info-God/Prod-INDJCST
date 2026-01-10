@@ -9,6 +9,8 @@ const journals = [
   { code: 'INDJECE', title: 'Indian Journal of Electronics and Communication Engineering', eIssn: '3048-6408', publicationMonths: '3 Issues Per Year (Apr, Aug, Dec)', url: 'https://fdrpjournals.org/indjece', className:"bg-amber-50" },
   { code: 'IJIRE', title: 'International Journal of Innovative Research in Engineering', eIssn: '2582-8746', publicationMonths: 'Bimonthly (Feb, Apr, Jun, Aug, Oct, Dec)', url: 'https://www.indjcst.com/', className:"bg-cyan-50" },
   { code: 'IJSREAT', title: 'International Journal of Scientific Research in Engineering & Technology', eIssn: '2583-1240', publicationMonths: 'Bimonthly(Feb, Apr, Jun, Aug, Oct, Dec)', url: 'https://www.ijsreat.com/', className:"bg-orange-50" },
+  { code: 'INDJCMR', title: 'Indian Journal of Clinical and Medical Research', eIssn: 'Applied', publicationMonths: 'triannual', url: 'https://www.fdrpjournals.org/indjcmr',  className:"bg-blue-50" },
+  { code: 'INDJCPR', title: 'Indian Journal of Clinical Pharmacy and Research', eIssn: 'Applied', publicationMonths: 'triannual', url: 'https://www.fdrpjournals.org/indjcpr', className:"bg-pink-50" }
 ];
 
 const JournalsCompendium = () => {

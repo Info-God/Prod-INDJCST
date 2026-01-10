@@ -16,19 +16,19 @@ export default function AboutSection() {
           <Title2h2>INDJCST Welcomes You!</Title2h2>
           <h3 className="font-medium text-sm xl:text-base 2xl:text-lg leading-relaxed">Empowering researchers. Advancing technology. Publishing excellence.</h3>
           <p className="text-secondaryText mb-4 text-sm xl:text-base 2xl:text-lg leading-relaxed mt-6">
-            The <b>Indian Journal of Computer Science and Technology (INDJCST)</b> (e-ISSN: 2583-
+            The Indian Journal of Computer Science and Technology (INDJCST) (e-ISSN: 2583-
             5300) is a reputable, open-access journal dedicated to publishing high-quality research papers
-            across all domains of Computer Science and Technology. As one of the <b>top computer
-            science journals in India</b>, and listed among the best computer science journals, INDJCST
+            across all domains of Computer Science and Technology. As one of the top computer
+            science journals in India, and listed among the best computer science journals, INDJCST
             provides a reliable platform for academicians, educators, researchers, engineers, and industry
             professionals.
           </p>
           <p className="text-secondaryText text-sm xl:text-base 2xl:text-lg leading-relaxed mt-6">
-            Published three times a year, INDJCST follows the <b>best computer science journals list</b>
+            Published three times a year, INDJCST follows the best computer science journals list
             standards and adheres strictly to UGC-CARE guidelines. Our rigorous peer-review process
             ensures that every submission meets the highest standards of scholarly excellence, making
-            INDJCST a <b>trusted journal of computer science</b> and an excellent choice for authors seeking
-            <b>fast publication computer science journals</b> or <b>fast publishing computer science</b> journals.
+            INDJCST a trusted journal of computer science and an excellent choice for authors seeking
+            fast publication computer science journals or fast publishing computer science journals.
           </p>
         </div>
       </div>

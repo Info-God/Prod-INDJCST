@@ -39,7 +39,7 @@ const features = [
   {
     icon: "./feature/5.webp",
     title: 'Online Article Submission',
-    endpoint: "/journal-publishing-process",
+    endpoint: "//editorial.fdrpjournals.org/login?journal=1",
     description: 'Instance status and dependencies in one aggregated view.',
     logo:<MdOutlinePublish className='text-primary h-13 w-13 pl-3 pt-3'/>
   },

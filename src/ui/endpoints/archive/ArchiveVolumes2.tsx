@@ -210,7 +210,7 @@ export default function ArchiveVolumes2() {
                         name="search"
                         onChange={handleChange}
                         value={form.search}
-                        placeholder="Search by Paper ID, Paper Name"
+                        placeholder="Search by Tile, Author name"
                         className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm xl:text-base 2xl:text-lg"
                     />
                     {!form.search && ArticalVolumesSearch ? (
