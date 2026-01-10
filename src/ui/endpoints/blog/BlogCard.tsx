@@ -14,7 +14,7 @@ export const BlogCard = ({ blog, keyProp }: { blog: Blog, keyProp: number }) => 
     }
     return (
         <div key={keyProp} className=" rounded-md overflow-hidden border border-gray-200 max-w-[400px] mx-auto">
-            {path.startsWith("blogs")?
+            {path.includes("blogs")?
             <img loading='lazy'
                 src={blog.image !== "https://INDJCST.com/blogImage/" ? blog.image ?? "" : "/blog.webp"} alt={blog.title ?? "blog image"} className="w-full h-64 object-cover" />:
             <img loading='lazy'
