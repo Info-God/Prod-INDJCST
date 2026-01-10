@@ -13,7 +13,7 @@ export default function AboutSection() {
         {/* Text Content */}
         <div className="w-full md:w-1/2">
           {/* <h2 className="text-3xl font-semibold text-primaryText mb-4">Welcome to INDJCST</h2> */}
-          <Title2h2>INDJCST Welcomes You!T</Title2h2>
+          <Title2h2>INDJCST Welcomes You!</Title2h2>
           <h3 className="font-medium text-sm xl:text-base 2xl:text-lg leading-relaxed">Empowering researchers. Advancing technology. Publishing excellence.</h3>
           <p className="text-secondaryText mb-4 text-sm xl:text-base 2xl:text-lg leading-relaxed mt-6">
             The <b>Indian Journal of Computer Science and Technology (INDJCST)</b> (e-ISSN: 2583-

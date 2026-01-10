@@ -10,7 +10,7 @@ export const BlogCard = ({ blog, keyProp }: { blog: Blog, keyProp: number }) => 
 
     const handelNavigate = () => {
         dispatch(setBlog(blog))
-        navigate(path.startsWith("blogs")?`/blogs/${blog.url_title}`:`/tag/${blog.url_title}`)
+        navigate(path.startsWith("/blogs")?`/blogs/${blog.url_title}`:`/tag/${blog.url_title}`)
     }
     return (
         <div key={keyProp} className=" rounded-md overflow-hidden border border-gray-200 max-w-[400px] mx-auto">

@@ -1,169 +1,140 @@
-import Title from "../../../other/Title";
+
 
 export default function EMSPage() {
-    return (
-        <section className="leading-relaxed space-y-6 mb-10  2xl:text-lg">
-            <Title>
-                Editorial management system
-            </Title>
-            <article className="space-y-12">
-                <div className="_cardSectionEMS items-center gap-y-6 sm:gap-x-6 grid sm:grid-cols-2 justify-between">
-                    <div className="textsection space-y-6">
-                        <div>
-                            <h2 className="font-medium text-lg xl:text-xl 2xl:text-2xl mb-2">1. How to submit article?</h2>
-                            <p>Create Account by using Author <span className="text-green-500">Name, email ID, Mobile No</span>. Once Account created, author can enter directly Login Credential. After that, By Using New Submission, author can submit Article.
-                                <br />
-                                <span className="text-red-500 font-medium">Note:</span> Make sure are you entered <span className="text-green-500">correct email ID, Mobile No</span>. because we will send Notification registered Email, Mobile No.</p>
-                        </div>
-                        <div>
-                            <h2 className="font-medium text-lg xl:text-xl 2xl:text-2xl mb-2">While Submitting Article, author can choose below Details:</h2>
-                            <ul className="list-disc list-inside space-y-1">
-                                <li>Research Area</li>
-                                <li>Mode of Process</li>
-                                <li>Type of article</li>
-                                <li>Type of Issues</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="image flex flex-col gap-8 justify-center">
-                        <img loading='lazy'
-                            src="/EMS/EMS1.webp" alt="submit article image" />
-                        <iframe loading="lazy" height="210" src="https://www.youtube.com/embed/6lVYYE0NF3s" title="IndJcst _Article Submission" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
-                    </div>
-                </div>
-                <hr className="text-gray-300" />
-                <div className="_cardSectionEMS items-center gap-y-6 sm:gap-x-6 grid sm:grid-cols-2 justify-between">
-                    <div className="image grid gap-4">
-                        <img loading='lazy'
-                            src="/EMS/EMS3.webp" alt=" Author can know task Process image" />
-                    </div>
-                    <div className="textsection space-y-4">
-                        <div>
-                            <h2 className="font-medium text-lg xl:text-xl 2xl:text-2xl mb-2">2. Author can know task Process?</h2>
-                            <p>Yes. Absolutely.
-                                <br />
-                                <br />
-                                After submitted article. Your article under Editorial Check. It can be represented, in terms of Plagiarism Check, Peer-Review etc. Once your article accepted after Review process, Author can view the <span className="text-green-500">Task</span> with Status.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <hr className="text-gray-300" />
-                <div className="_cardSectionEMS items-center gap-y-6 sm:gap-x-6 grid sm:grid-cols-2 justify-between">
-                    <div className="textsection space-y-4">
-                        <div>
-                            <h2 className="font-medium text-lg xl:text-xl 2xl:text-2xl mb-2">3. Author can know Review Process?</h2>
-                            <p>Yes. Absolutely.
-                                <br />
-                                <br />
+  return (
+    <section className="max-w-7xl mx-auto p-6 bg-white shadow-sm rounded-lg space-y-10 leading-relaxed mt-4">
+      <h1 className="text-2xl font-semibold">Step-by-Step Guide for Authors</h1>
 
-                                After plagiarism Check, Article will assign to reviewer with respective Research area. Once Editorinchief, received response from reviewers. Final Note will be Displayed, Like <span className="text-green-500">-Accept/Accept with minor correction/ Reject</span> notification will send to author.
+      {/* 1 */}
+      <div className="space-y-3">
+        <h2 className="text-xl font-semibold">1️⃣ How to Submit an Article</h2>
 
-                            </p>
-                        </div>
-                    </div>
-                    <div className="image grid gap-4">
-                        <img loading='lazy'
-                            src="/EMS/EMS4.webp" alt="Author can know Review Process image" />
-                    </div>
-                </div>
-                <hr className="text-gray-300" />
-                <div className="_cardSectionEMS items-center gap-y-6 sm:gap-x-6 grid sm:grid-cols-2 justify-between">
-                    <div className="image grid gap-4">
-                        <img loading='lazy'
-                            src="/EMS/EMS5.webp" alt="How Author can Know submitted Article Accepted or Not image" />
-                    </div>
-                    <div className="textsection space-y-4">
-                        <div>
-                            <h2 className="font-medium text-lg xl:text-xl 2xl:text-2xl mb-2">4. How Author can Know submitted Article Accepted or Not?</h2>
-                            <p>
-                                Once Reviewer’s Command Satisfactory, Editorinchief will release Acceptance letter along with Tentative Article Publication Scheduled Date through Editorial Office. Author can view in <span className="text-green-500">Acceptance Tap</span>.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <hr className="text-gray-300" />
-                <div className="_cardSectionEMS items-center gap-y-6 sm:gap-x-6 grid sm:grid-cols-2 justify-between">
-                    <div className="textsection space-y-4">
-                        <div>
-                            <h2 className="font-medium text-lg xl:text-xl 2xl:text-2xl mb-2">5. What is the Procedure for Accepted Article to be publish?</h2>
-                            <p>
-                                Once you’re Article Accepted for Publication, Author have to follow 3 steps.
-                                <h2 className="font-medium text-lg xl:text-xl 2xl:text-2xl my-2">a&#41; Final Manuscript</h2>
-                                As per <span className="text-green-500">our journal format</span>
-                            </p>
-                        </div>
-                    </div>
-                    <div className="image grid gap-4">
-                        <img loading='lazy'
-                            src="/EMS/EMS6.webp" alt="What is the Procedure for Accepted Article to be publish image" />
-                    </div>
-                </div>
-                <hr className="text-gray-300" />
-                <div className="_cardSectionEMS items-center gap-y-6 sm:gap-x-6 grid sm:grid-cols-2 justify-between">
-                    <div className="image grid gap-4">
-                        <img loading='lazy' className="w-full"
-                            src="/EMS/EMS7.webp" alt="Copyright Form image" />
-                    </div>
-                    <div className="textsection space-y-4">
-                        <div>
-                            <h2 className="font-medium text-lg xl:text-xl 2xl:text-2xl mb-2">b&#41; Copyright Form</h2>
-                            <p>
-                                (For generating copyright form-Author have to update profile. Like, Address, etc. then only copyright form will generate. Take print out, manually corresponding author have to signature)
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <hr className="text-gray-300" />
-                <div className="_cardSectionEMS items-center gap-y-6 sm:gap-x-6 grid sm:grid-cols-2 justify-between">
-                    <div className="textsection space-y-4">
-                        <div>
-                            <h2 className="font-medium text-lg xl:text-xl 2xl:text-2xl mb-2">c&#41; Article Processing fee receipt (with DOI, With out DOI)</h2>
-                        </div>
-                    </div>
-                    <div className="image grid gap-4">
-                        <iframe loading="lazy" height="210" className="w-full" src="https://www.youtube.com/embed/mrABQSzqvbU" title="INDJCST _Article Review & Acceptance" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
-                    </div>
+        <h3 className="font-medium">Step 1: Create an Account</h3>
+        <ul className="list-disc pl-5 space-y-1">
+          <li>Provide your Author Name, Email ID, and Mobile Number.</li>
+          <li>After account creation, log in using your credentials.</li>
+        </ul>
+        <p className="text-sm text-gray-600">
+          <strong>Note:</strong> Ensure your email and mobile number are correct. All notifications will be
+          sent to your registered email and mobile.
+        </p>
 
-                </div>
-                <div>
-                    <h2>
-                        <span className="text-red-500 text-lg xl:text-xl 2xl:text-2xl">
-                            Note:
-                        </span><br />
-                        Once we received all necessary Documents. We will process your article. Article will publish with in 24hrs to 48hrs.
-                    </h2>
-                    <div className="_cardSectionEMS items-center gap-y-6 sm:gap-x-6 grid sm:grid-cols-2 justify-between mt-6">
-                        <div className="textsection space-y-4">
-                            <img loading='lazy'
-                                src="/EMS/EMS8.webp" alt="Process verification image 1" />
-                        </div>
-                        <div className="image grid gap-y-8">
-                            <div>
-                                <h2 className="">d&#41; Final Submission Upload your <span className="text-green-500">final article, copyright form, and APC receipt</span>. Verify your uploaded documents, and then click &gt; <span className="text-green-500">Final Submit</span> Button-for final submission.</h2>
-                            </div>
-                            <div className="image grid gap-4">
-                                <iframe height={210} className="w-full" loading="lazy" src="https://www.youtube.com/embed/6lVYYE0NF3s" title="IndJcst _Article Submission" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr className="text-gray-300" />
-                <div className="_cardSectionEMS items-center gap-y-6 sm:gap-x-6 grid sm:grid-cols-2 justify-between">
-                    <div className="textsection space-y-4">
-                        <div>
-                            <h2 className="font-medium text-lg xl:text-xl 2xl:text-2xl mb-2">6. Author will get certificates including corresponding authors?</h2>
-                            <p>
-                                Yes. All author will get certificates. Author can download <span className="text-green-500">file Tab</span>. Also Published Article Copy and Journal Archive link also.
+        <h3 className="font-medium">Step 2: Submit Your Article</h3>
+        <ul className="list-disc pl-5 space-y-1">
+          <li>Click on <strong>New Submission</strong>.</li>
+          <li>Fill in the required details carefully:</li>
+          <ul className="list-disc pl-10 space-y-1 text-gray-700">
+            <li>Research Area</li>
+            <li>Mode of Process</li>
+            <li>Type of Article</li>
+            <li>Type of Issue</li>
+          </ul>
+        </ul>
+      </div>
 
-                            </p>
-                        </div>
-                    </div>
-                    <div className="image grid gap-4">
-                        <iframe height={210} className="w-full" loading="lazy" src="https://www.youtube.com/embed/gzYb7YbFRUQ" title="Indjcst_Article Final Submission &amp; Publish" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
-                    </div>
-                </div>
-            </article>
-        </section>
-    )
+      {/* 2 */}
+      <div className="space-y-3">
+        <h2 className="text-xl font-semibold">2️⃣ How to Track Article Progress 📊</h2>
+        <ul className="list-disc pl-5 space-y-1">
+          <li>Your article undergoes an Editorial Check, which may include:</li>
+          <ul className="list-disc pl-10 space-y-1 text-gray-700">
+            <li>Plagiarism Check</li>
+            <li>Peer Review</li>
+          </ul>
+        </ul>
+        <p>You can track the status of your article anytime through your author dashboard.</p>
+        <p className="text-sm text-gray-600">
+          <strong>Note:</strong> Use the <em>Track Article Progress</em> section inside your dashboard.
+        </p>
+      </div>
+
+      {/* 3 */}
+      <div className="space-y-3">
+        <h2 className="text-xl font-semibold">3️⃣ How the Review Process Works 📝</h2>
+        <ul className="list-disc pl-5 space-y-1">
+          <li>After plagiarism check, the article is assigned to reviewers based on your research area.</li>
+          <li>The Editor-in-Chief receives feedback from reviewers.</li>
+          <li>The final decision is communicated to the author:</li>
+          <ul className="list-disc pl-10 text-gray-700 space-y-1">
+            <li>Accept</li>
+            <li>Accept with Minor Corrections</li>
+            <li>Reject</li>
+          </ul>
+        </ul>
+        <p className="text-sm text-gray-600">
+          <strong>Note:</strong> Review progress can be monitored inside your dashboard.
+        </p>
+      </div>
+
+      {/* 4 */}
+      <div className="space-y-3">
+        <h2 className="text-xl font-semibold">4️⃣ How to Know if Your Article is Accepted 📄</h2>
+        <ul className="list-disc pl-5 space-y-1">
+          <li>If reviewers’ comments are satisfactory, the Editor-in-Chief releases the Acceptance Letter.</li>
+          <li>The letter includes the tentative publication date.</li>
+          <li>You can view the Acceptance Letter in the <strong>Acceptance Tab</strong> of your account.</li>
+        </ul>
+      </div>
+
+      {/* 5 */}
+      <div className="space-y-3">
+        <h2 className="text-xl font-semibold">5️⃣ Procedure after Article Acceptance ✅</h2>
+        <p>Once your article is accepted, submit the following within one week in the Final Submission Tab:</p>
+
+        <ol className="list-decimal pl-5 space-y-1">
+          <li>
+            <strong>Final Manuscript</strong> – Ensure it follows the journal’s formatting guidelines.
+          </li>
+          <li>
+            <strong>Copyright Form</strong>
+            <ul className="list-disc pl-8 space-y-1 text-gray-700">
+              <li>Update your profile with necessary details (e.g., address).</li>
+              <li>Generate and print the copyright form.</li>
+              <li>The corresponding author must sign manually.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Article Processing Fee (APC) Receipt</strong> – Applicable with or without DOI.
+          </li>
+        </ol>
+
+        <p className="text-sm text-gray-600">
+          <strong>Note:</strong> After receiving all required documents, your article will be published
+          within <strong>24–48 hours</strong>.
+        </p>
+      </div>
+
+      {/* 6 */}
+      <div className="space-y-3">
+        <h2 className="text-xl font-semibold">6️⃣ Final Submission 📤</h2>
+        <p>To complete final submission:</p>
+        <ul className="list-disc pl-5 space-y-1">
+          <li>Open your Article ID and go to the <strong>Final Submission Tab</strong>.</li>
+          <li>Upload the following documents:</li>
+          <ul className="list-disc pl-10 space-y-1 text-gray-700">
+            <li>Final Manuscript</li>
+            <li>Copyright Form</li>
+            <li>APC Receipt</li>
+          </ul>
+          <li>Verify your uploads carefully.</li>
+          <li>Click the <strong>Final Submit</strong> button.</li>
+        </ul>
+      </div>
+
+      {/* 7 */}
+      <div className="space-y-3">
+        <h2 className="text-xl font-semibold">7️⃣ Certificates and Published Article Access 🎓</h2>
+        <ul className="list-disc pl-5 space-y-1">
+          <li>All authors, including the corresponding author, will receive certificates.</li>
+          <li>Authors can also download:</li>
+          <ul className="list-disc pl-10 space-y-1 text-gray-700">
+            <li>Published article copy</li>
+            <li>Journal archive link</li>
+            <li>Certificates for all authors</li>
+          </ul>
+        </ul>
+        <p className="text-sm text-gray-600">Downloads are available under the <strong>File Tab</strong>.</p>
+      </div>
+    </section>
+  );
 }
