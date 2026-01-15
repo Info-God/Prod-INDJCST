@@ -173,7 +173,7 @@ export interface ThesisListingItem {
 export interface ContactUs {
   name: string,
   email: string,
-  phone: string,
+  mobileNumber: string,
   message: string,
 }
 

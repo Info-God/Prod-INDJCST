@@ -30,3 +30,15 @@ button{
     {
         @apply text-dark
     } */
+.responsive-toast {
+  @apply text-sm rounded-lg;
+  width: 360px;
+}
+
+@media (max-width: 570px) {
+  .responsive-toast {
+    width: 50vw !important;  
+    margin-right:10px !important;
+    /* margin-left: auto !important; */
+  }
+}

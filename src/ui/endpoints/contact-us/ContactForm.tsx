@@ -4,21 +4,21 @@ import { SendContactUs } from '../../../lib/axios/api/contact';
 import { setLoading } from '../../../lib/store/Features/loadingSlice';
 import { useAppDispatch, useAppSelector } from '../../../lib/store/store';
 import Loading from '../../components/Loading';
-
+import { toast } from 'react-toastify';
 const ContactForm = () => {
   const dispatch = useAppDispatch()
   const loading = useAppSelector(state=>state.loadingScreen.loading)
   const [form, setForm] = useState<ContactUs>({
     name: '',
     email: '',
-    phone: '',
+    mobileNumber: '',
     message: '',
   });
 
   const [errors, setErrors] = useState({
     name: '',
     email: '',
-    phone: '',
+    mobileNumber: '',
     message: '',
   });
 
@@ -30,7 +30,7 @@ const ContactForm = () => {
     const newErrors = {
       name: form.name ? '' : 'Name is required',
       email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email) ? '' : 'Valid email is required',
-      phone: /^[0-9]{10}$/.test(form.phone) ? '' : 'Valid 10-digit phone number is required',
+      mobileNumber: /^[0-9]{10}$/.test(form.mobileNumber) ? '' : 'Valid 10-digit phone number is required',
       message: form.message ? '' : 'Message is required',
     };
     setErrors(newErrors);
@@ -43,10 +43,10 @@ const ContactForm = () => {
       // Simulated submission
       // console.log('Form submitted:', form);
       dispatch(setLoading(true))
-      SendContactUs(form).then(() => alert('Message sent successfully!')).catch(() => alert("soming went wrong")).finally(() => {
+      SendContactUs(form).then(() => toast.success('Message sent successfully!')).catch(() => toast.error("soming went wrong")).finally(() => {
         dispatch(setLoading(false))
       })
-      setForm({ name: '', email: '', phone: '', message: '' });
+      setForm({ name: '', email: '', mobileNumber: '', message: '' });
 
     }
   };
@@ -83,13 +83,13 @@ const ContactForm = () => {
         <div>
           <input
             type="tel"
-            name="phone"
+            name="mobileNumber"
             placeholder="Your Phone *"
-            value={form.phone}
+            value={form.mobileNumber}
             onChange={handleChange}
             className="w-full px-4 py-3 bg-gray-100 placeholder-gray-500 rounded"
           />
-          {errors.phone && <p className="text-sm xl:text-base 2xl:text-lg text-red-500">{errors.phone}</p>}
+          {errors.mobileNumber && <p className="text-sm xl:text-base 2xl:text-lg text-red-500">{errors.mobileNumber}</p>}
         </div>
       </div>
 
