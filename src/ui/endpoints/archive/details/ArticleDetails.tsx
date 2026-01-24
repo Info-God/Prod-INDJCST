@@ -69,6 +69,11 @@ const ArticleDetails = () => {
     <MetaDataWrapper titleDynamic={dtitle.current?.innerText ?? activePaper.paper_title} desciptionDynamic={activePaper.paper_abstract?.split(".")[0]}>
       <div className="mx-auto  bg-white space-y-3 sm:space-y-6 p-2 sm:p-5">
         {/* Header + PDF Button */}
+          <div className="mb-3">
+            <span className="inline-block bg-blue-100 text-black-800 text-sm px-4 py-1.5  font-medium">
+              {activePaper?.paper_articletype}
+           </span>
+       </div>
         <div className="flex justify-between items-start">
           <div>
             <h2 id="dtitle" ref={dtitle} className="text-2xl xl:text-3xl font-medium leading-snug font-serif text-primary">

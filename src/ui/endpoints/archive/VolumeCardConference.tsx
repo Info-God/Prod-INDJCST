@@ -2,7 +2,10 @@ import { ArrowUpRight, Download, Eye, SearchIcon } from "lucide-react";
 import { Link, NavLink, type NavigateFunction } from "react-router-dom";
 import type { ConferenceArticleProps } from "../../../types/Api";
 import { ImQuotesRight } from "react-icons/im";
-
+import { useEffect } from "react";
+import { fetchPaperViewsThunk } from "../../../lib/store/Features/ArchiveSlice";
+import { useDispatch ,useSelector } from "react-redux";
+import type { RootState  } from "../../../lib/store/store";
 import PrimaryBtn from "../../components/Btns/PrimaryBtn";
 
 export default function VolumeCardConference({ paper, setActive, navigate }: { paper: ConferenceArticleProps, setActive: (arg: ConferenceArticleProps) => void, navigate: NavigateFunction }) {
@@ -10,6 +13,12 @@ export default function VolumeCardConference({ paper, setActive, navigate }: { p
     const HandleGoolge = () => {
         window.open(`https://www.google.com/search?q=${encodeURIComponent(paper.title)}`, '_blank')
     }
+     const paperViews = useSelector((state: RootState) => state.archiveSection?.paperViews?.[paper.id]);
+    const dispatch=useDispatch()
+   useEffect(() => {
+    (dispatch as any)(fetchPaperViewsThunk(paper.id));
+    console.log("🟣 Dispatch called");
+}, [dispatch, paper.id]);
     return (
         <div
             className="bg-white shadow rounded-xl p-4 space-y-2 border"
@@ -32,6 +41,7 @@ export default function VolumeCardConference({ paper, setActive, navigate }: { p
                     if (e) return index === 0 ? e.toString() : (", ").concat(e.toString())
                 })}
                 <br />
+                 <span className="font-bold">Article Type : </span> {paper.article_type}
                 <span className="font-bold">Published Online : </span> {paper.year && paper.month? `${paper.month} ${paper.year}`:new Date(paper.updated_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
                 <br />
                 <span className="font-bold">Pages : </span> {paper.pages}
@@ -40,7 +50,7 @@ export default function VolumeCardConference({ paper, setActive, navigate }: { p
             {/* Metrics */}
             <div className="flex flex-wrap items-center gap-6 gap-y-3 text-gray-500 mt-1">
                 <div className="flex items-center gap-3">
-                    <Eye size={18} /> {50} Views
+                    <Eye size={18} />  {paperViews?.isLoading ? "..." : (paperViews?.total_views || 0)} Views
                 </div>
                 <div className="h-4" />
                 <div className="flex items-center gap-3">

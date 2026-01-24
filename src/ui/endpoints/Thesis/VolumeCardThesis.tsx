@@ -2,6 +2,10 @@ import { Download, Eye, SearchIcon } from "lucide-react";
 import { Link, NavLink, type NavigateFunction } from "react-router-dom";
 import type { ThesisListingItem } from "../../../types/Api";
 import { ImQuotesRight } from "react-icons/im";
+import { useEffect } from "react";
+import { fetchPaperViewsThunk } from "../../../lib/store/Features/ArchiveSlice";
+import { useDispatch ,useSelector } from "react-redux";
+import type { RootState  } from "../../../lib/store/store";
 
 import PrimaryBtn from "../../components/Btns/PrimaryBtn";
 
@@ -10,6 +14,11 @@ export default function VolumeCardThesis({ paper, setActive, navigate }: { paper
     const HandleGoolge = () => {
         window.open(`https://www.google.com/search?q=${encodeURIComponent(paper.title)}`, '_blank')
     }
+    const paperViews = useSelector((state: RootState) => state.archiveSection?.paperViews?.[paper.id]);
+    const dispatch=useDispatch()
+   useEffect(() => {
+    (dispatch as any)(fetchPaperViewsThunk(paper.id));
+    }, [dispatch, paper.id]);
     return (
         <div
             className="bg-white shadow rounded-xl p-4 space-y-2 border"
@@ -40,7 +49,7 @@ export default function VolumeCardThesis({ paper, setActive, navigate }: { paper
             {/* Metrics */}
                         <div className="flex flex-wrap items-center gap-6 gap-y-3 text-gray-500 mt-1">
                 <div className="flex items-center gap-3">
-                    <Eye size={18} /> {50} Views
+                     <Eye size={18} />  {paperViews?.isLoading ? "..." : (paperViews?.total_views || 0)} Views 
                 </div>
                 <div className="h-4" />
                 <div className="flex items-center gap-3">

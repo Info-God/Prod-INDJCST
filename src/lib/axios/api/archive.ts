@@ -87,3 +87,14 @@ export const searchArchive = async (req: SearchProp) => {
         console.log(error)
     }
 }
+export const fetchPaperViews = async (paperId: string | number) => {
+    try {
+        const response = await axiosClient.post(`/papers/${paperId}/view`, {
+            paper_id: paperId
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Failed to fetch paper views:", error);
+        return null;
+    }
+}

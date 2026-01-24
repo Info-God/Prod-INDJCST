@@ -39,6 +39,8 @@ export interface ConferenceArticleProps {
   designation: string | null;
   doi: string | null;
   doi_link: string | null;
+   total_views?: number;
+  unique_views?: number;
 }
 
 

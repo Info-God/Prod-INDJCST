@@ -3,6 +3,10 @@ import { Link, NavLink, useLocation, type NavigateFunction } from "react-router-
 import type { ArchivePaperDetailProps } from "../../../types/Api";
 import { ImQuotesRight } from "react-icons/im";
 import PrimaryBtn from "../../components/Btns/PrimaryBtn";
+import { useEffect } from "react";
+import { fetchPaperViewsThunk } from "../../../lib/store/Features/ArchiveSlice";
+import { useDispatch ,useSelector } from "react-redux";
+import type { RootState  } from "../../../lib/store/store";
 
 export default function VolumeCardArchive({ paper, setActive, navigate }: { paper: ArchivePaperDetailProps, setActive: (arg: ArchivePaperDetailProps) => void, navigate: NavigateFunction }) {
     const url = useLocation().pathname
@@ -10,6 +14,11 @@ export default function VolumeCardArchive({ paper, setActive, navigate }: { pape
     const HandleGoolge = () => {
         window.open(`https://www.google.com/search?q=${encodeURIComponent(paper.paper_title)}`, '_blank')
     }
+    const paperViews = useSelector((state: RootState) => state.archiveSection?.paperViews?.[paper.paper_id]);
+    const dispatch=useDispatch()
+   useEffect(() => {
+    (dispatch as any)(fetchPaperViewsThunk(paper.paper_id));
+   }, [dispatch, paper.paper_id]);
     return (
         <div
             className="bg-white shadow rounded-xl p-4 space-y-2 border"
@@ -32,6 +41,8 @@ export default function VolumeCardArchive({ paper, setActive, navigate }: { pape
                     if (e) return index === 0 ? e.toString() : (", ").concat(e.toString())
                 })}
                 <br />
+                <span className="font-bold">Article Type : </span> {paper.paper_articletype}
+                 <br />
                 <span className="font-bold">Published Online : </span> {paper.paper_month} {paper.year}
                 <br />
                 <span className="font-bold">Pages : </span> {paper.paper_pages}
@@ -40,7 +51,7 @@ export default function VolumeCardArchive({ paper, setActive, navigate }: { pape
             {/* Metrics */}
             <div className="flex flex-wrap items-center gap-6 gap-y-3 text-gray-500 mt-1">
                 <div className="flex items-center gap-3">
-                    <Eye size={18} /> {50} Views
+                    <Eye size={18} /> {paperViews?.isLoading ? "..." : (paperViews?.total_views || 0)} Views
                 </div>
                 <div className="h-4" />
                 <div className="flex items-center gap-3">
