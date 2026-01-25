@@ -1,5 +1,5 @@
-import { Share2 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { ArrowLeft, ArrowRight, Share2 } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import FullArtical from "./FullArtical";
 import RelatedArticles from "../components/RelatedArticals";
 import References from "./References";
@@ -12,41 +12,66 @@ import { useAppDispatch, useAppSelector } from "../../../../lib/store/store";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { FetchActiveArticle } from "../../../../lib/axios/api/archive";
 import { setActivePaper } from "../../../../lib/store/Features/ArchiveSlice";
-import { setLoading } from "../../../../lib/store/Features/loadingSlice";
 import Loading from "../../../components/Loading";
 import type { ArchivePaperDetailProps } from "../../../../types/Api";
 import PrimaryBtn from "../../../components/Btns/PrimaryBtn";
 import { VscFilePdf } from "react-icons/vsc";
-import { MdDone } from "react-icons/md";
 import MetaDataWrapper from "../../../components/layout/MetaDataWrapper";
 import { superscriptifyAllNumbers } from "../../../../lib/utils/other/superScript";
 import useDimensionsBadge from "../../../components/cards/plumx/useDimensionsBadge";
+import SharePopup from "../../../components/SharePopup";
 
 type TabOption = "FullArticle" | "References" | "Citations" | "Metrics" | "Licensing";
 
 const ArticleDetails = () => {
   const dtitle = useRef<HTMLHeadingElement>(null)
-  const searchQuery = useSearchParams();
-  const id = searchQuery[0].get("paperid")
-  const [currentItem, setCurrentItem] = useState<TabOption>(searchQuery[0].get("section")?.replace("-", " ") as TabOption || "FullArticle")
-  const [copy, SetCopy] = useState<boolean>(false)
+  const [showSharePopup, setShowSharePopup] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useSearchParams();
+  const id = searchQuery.get("paperid")
+  const [currentItem, setCurrentItem] = useState<TabOption>(searchQuery.get("section")?.replace("-", " ") as TabOption || "FullArticle")
   const ActiveArticle = useAppSelector((state) => state.archiveSection.activePaper)
   const [activePaper, setPaper] = useState<ArchivePaperDetailProps | null>(ActiveArticle)
-
   const navigate = useNavigate()
-
+  const { papers } = useAppSelector(s => s.archiveSection)
   // store data
-  const loading = useAppSelector((state) => state.loadingScreen.loading)
+  const [loading, setLoading] = useState<boolean>(false)
   const dispatch = useAppDispatch()
   const auther = [activePaper?.author_1, activePaper?.author_2, activePaper?.author_3, activePaper?.author_4, activePaper?.author_5, activePaper?.author_6].filter(item => item !== null)
-  // const designation: string[] = activePaper?.paper_designation?.split(",") ?? []
-  // functions
+
+
   useDimensionsBadge()
+
+  const currentIndex = useMemo(() => {
+    if (!id) return -1;
+    return papers.findIndex(p => p.paper_id === Number(id));
+  }, [papers, id]);
+
+  // handeling the prev and next page functionality
+  const handlePreviousPage = () => {
+    if (currentIndex <= 0) return;
+
+    const prev = papers[currentIndex - 1];
+    setSearchQuery({
+      paperid: prev.paper_id.toString(),
+      papertitle: prev.paper_title,
+    });
+  };
+
+  const handleNextPage = () => {
+    if (currentIndex === -1 || currentIndex >= papers.length - 1) return;
+
+    const next = papers[currentIndex + 1];
+    setSearchQuery({
+      paperid: next.paper_id.toString(),
+      papertitle: next.paper_title,
+    });
+  };
+  // previous papers list
+
   useEffect(() => {
-    dispatch(setLoading(true))
+    setLoading(true)
     if (id) {
       if (activePaper?.paper_id !== parseInt(id)) {
-
         FetchActiveArticle({ paperid: id }).then((data) => {
           if (data) {
             dispatch(setActivePaper(data))
@@ -54,25 +79,25 @@ const ArticleDetails = () => {
           }
         })
       }
-      dispatch(setLoading(false))
+      setLoading(false)
     } else {
-      dispatch(setLoading(false))
+      setLoading(false)
       navigate("/archives")
     }
+  }, [navigate, activePaper, id, dispatch, ActiveArticle, papers])
 
-  }, [navigate, activePaper, id, dispatch, ActiveArticle])
-
-  if (loading || !activePaper) {
+  if (loading || !activePaper || id != activePaper.paper_id.toString()) {
     return <Loading title="Paper Details" />
   }
+
   return (
     <MetaDataWrapper titleDynamic={dtitle.current?.innerText ?? activePaper.paper_title} desciptionDynamic={activePaper.paper_abstract?.split(".")[0]}>
       <div className="mx-auto  bg-white space-y-3 sm:space-y-6 p-2 sm:p-5">
         {/* Header + PDF Button */}
-          <div className="mb-3">
-            <span className="inline-block bg-blue-100 text-black-800 text-sm px-4 py-1.5  font-medium">
+        <div className="mb-3">
+      <span className="inline-block bg-blue-100 text-black-800 text-sm px-4 py-1.5  font-medium">
               {activePaper?.paper_articletype}
-           </span>
+      </span>
        </div>
         <div className="flex justify-between items-start">
           <div>
@@ -81,7 +106,20 @@ const ArticleDetails = () => {
             </h2>
           </div>
         </div>
+        {papers.length > 0 && currentIndex !== -1 && (
+          <div className="flex items-center justify-between">
+            {currentIndex > 0 && (
+              <button className="primaryBtn" onClick={handlePreviousPage}>
+                <ArrowLeft /> Previous
+              </button>
+            )}
 
+            {currentIndex < papers.length - 1 && (
+              <button className="ml-auto primaryBtn" onClick={handleNextPage}>
+                Next <ArrowRight />
+              </button>
+            )}
+          </div>)}
         {/* Meta Information */}
         <div className="space-y-3 text-primary-text leading-relaxed text-sm xl:text-base 2xl:text-lg sm:text-base">
           <div className="flex gap-3 ">
@@ -131,7 +169,7 @@ const ArticleDetails = () => {
             }
           </div>
 
-          <button className="inline-flex sm:hidden items-center justify-center bg-[#A52A2A1A] text-primary-text text-sm xl:text-base 2xl:text-lg font-medium w-12 h-12 xl:w-16 xl:h-16 hover:bg-[#cc282846] transition-colors rounded-full">
+          <button onClick={() => setShowSharePopup(true)} className="inline-flex sm:hidden items-center justify-center bg-[#5C6BC01A] text-primary-text text-sm xl:text-base 2xl:text-lg font-medium w-12 h-12 xl:w-16 xl:h-16 hover:bg-[#5c6bc077] transition-colors rounded-full">
             <Share2 size={13} className="inline-block " />
           </button>
 
@@ -147,14 +185,8 @@ const ArticleDetails = () => {
             </span>
           </div>
 
-          <button className={`hidden sm:inline-flex items-center justify-center ${copy ? "bg-green-300 hover:bg-green-400" : "bg-[#A52A2A1A] hover:bg-[#cc282846]"} text-primary-text text-sm xl:text-base 2xl:text-lg font-medium w-12 h-12  xl:h-16 xl:w-16 transition-colors rounded-full`} onClick={() => {
-            navigator.clipboard.writeText(window.location.href)
-            SetCopy(true)
-            setTimeout(() => {
-              SetCopy(false)
-            }, 2000)
-          }}>
-            {!copy ? <Share2 size={13} className="inline-block xl:scale-150" /> : <MdDone size={13} className="inline-block xl:scale-150" />}
+          <button className={`hidden sm:inline-flex items-center justify-center bg-[#5C6BC01A] hover:bg-[#5c6bc077] text-primary-text text-sm xl:text-base 2xl:text-lg font-medium w-12 h-12  xl:h-16 xl:w-16 transition-colors rounded-full`} onClick={() => setShowSharePopup(true)}  >
+            <Share2 size={13} className="inline-block xl:scale-150" />
 
           </button>
         </div>
@@ -177,6 +209,12 @@ const ArticleDetails = () => {
             )
           )}
         </div>
+        <SharePopup
+          isOpen={showSharePopup}
+          onClose={() => setShowSharePopup(false)}
+          url={window.location.href}
+          title={activePaper?.paper_title || "Article"}
+        />
         <div className="2xl:text-lg">
 
           {currentItem === "FullArticle" && <FullArtical content={activePaper?.paper_abstract ?? ""} pdf_url={activePaper?.paper_url ?? ""} />}

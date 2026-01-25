@@ -1,5 +1,5 @@
-import { Share2 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { ArrowLeft, ArrowRight, Share2 } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../lib/store/store";
@@ -12,27 +12,28 @@ import ArticleMetrics from "../archive/details/ArticleMetrics";
 import References from "../archive/details/References";
 import RelatedArticles from "../archive/components/RelatedArticals";
 import type { ConferenceArticleProps } from "../../../types/Api";
-import { setLoading } from "../../../lib/store/Features/loadingSlice";
 import Loading from "../../components/Loading";
 import { FetchActiveConference } from "../../../lib/axios/api/conference";
 import PrimaryBtn from "../../components/Btns/PrimaryBtn";
 import { VscFilePdf } from "react-icons/vsc";
-import { MdDone } from "react-icons/md";
 import MetaDataWrapper from "../../components/layout/MetaDataWrapper";
 import { superscriptifyAllNumbers } from "../../../lib/utils/other/superScript";
 import useDimensionsBadge from "../../components/cards/plumx/useDimensionsBadge";
 import { setActiveConferenceArticle } from "../../../lib/store/Features/conferenceDetailseSlice";
+import SharePopup from "../../components/SharePopup";
 
 type TabOption = "FullArticle" | "References" | "Citations" | "Metrics" | "Licensing";
 
 const ConferenceDetails = () => {
   const dtitle = useRef<HTMLHeadingElement>(null)
-  const searchQuery = useSearchParams();
-  const [currentItem, setCurrentItem] = useState<TabOption>(searchQuery[0].get("section")?.replace("-", " ") as TabOption || "FullArticle")
-  const id = searchQuery[0].get("paperid")
-  const [copy, SetCopy] = useState<boolean>(false)
+  const [showSharePopup, setShowSharePopup] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useSearchParams();
+  const [currentItem, setCurrentItem] = useState<TabOption>(searchQuery.get("section")?.replace("-", " ") as TabOption || "FullArticle")
+  const id = searchQuery.get("paperid")
   const navigate = useNavigate()
-  const loading = useAppSelector((state) => state.loadingScreen.loading)
+  const { articleList: papers } = useAppSelector(s => s.conferenceArtical)
+  // store data
+  const [loading, setLoading] = useState<boolean>(false)
   const dispatch = useAppDispatch()
   const ActiveArticle = useAppSelector((state) => state.conferenceArtical.selectedArticle)
   const [activePaper, setPaper] = useState<ConferenceArticleProps | null>(ActiveArticle)
@@ -44,8 +45,34 @@ const ConferenceDetails = () => {
 
   useDimensionsBadge()
   // functions
+  const currentIndex = useMemo(() => {
+    if (!id) return -1;
+    return papers.findIndex(p => p.id === Number(id));
+  }, [papers, id]);
+
+  // handeling the prev and next page functionality
+  const handlePreviousPage = () => {
+    if (currentIndex <= 0) return;
+
+    const prev = papers[currentIndex - 1];
+    setSearchQuery({
+      paperid: prev.id.toString(),
+      papertitle: prev.title,
+    });
+  };
+
+  const handleNextPage = () => {
+    if (currentIndex === -1 || currentIndex >= papers.length - 1) return;
+
+    const next = papers[currentIndex + 1];
+    setSearchQuery({
+      paperid: next.id.toString(),
+      papertitle: next.title,
+    });
+  };
+
   useEffect(() => {
-    dispatch(setLoading(true))
+    setLoading(true)
     if (id) {
       if (activePaper?.id !== parseInt(id)) {
         // fetch conference here
@@ -56,14 +83,15 @@ const ConferenceDetails = () => {
           }
         })
       }
-      dispatch(setLoading(false))
+      setLoading(false)
     } else {
-      dispatch(setLoading(false))
+      setLoading(false)
       navigate("/conference")
     }
   }, [navigate, activePaper, dispatch, id]);
-  if (loading || !activePaper) {
-    return <Loading title="Paper Details" />
+
+  if (loading || !activePaper || id != activePaper.id.toString()) {
+    return <Loading title="Conference Details" />
   }
   return (
     <MetaDataWrapper titleDynamic={activePaper.title ?? dtitle.current?.innerText} desciptionDynamic={activePaper.abstract?.split(".")[0]}>
@@ -76,7 +104,20 @@ const ConferenceDetails = () => {
             </h2>
           </div>
         </div>
+        {papers.length > 0 && currentIndex !== -1 && (
+          <div className="flex items-center justify-between">
+            {currentIndex > 0 && (
+              <button className="primaryBtn" onClick={handlePreviousPage}>
+                <ArrowLeft /> Previous
+              </button>
+            )}
 
+            {currentIndex < papers.length - 1 && (
+              <button className="ml-auto primaryBtn" onClick={handleNextPage}>
+                Next <ArrowRight />
+              </button>
+            )}
+          </div>)}
         {/* Meta Information */}
         <div className="space-y-3 text-primary-text leading-relaxed text-sm xl:text-base 2xl:text-lg sm:text-base">
           <div className="flex gap-3 ">
@@ -99,7 +140,7 @@ const ConferenceDetails = () => {
                 </span>
               ))}
             </div> */}
-              <button className="hidden sm:inline-flex items-center justify-center bg-[#A52A2A1A]  text-sm xl:text-base 2xl:text-lg font-medium px-6 py-2.5 gap-3 hover:bg-[#cc282846]  text-paragraph transition-colors rounded-full h-fit">
+              <button onClick={() => setShowSharePopup(true)} className="hidden sm:inline-flex items-center justify-center bg-[#5C6BC01A]  text-sm xl:text-base 2xl:text-lg font-medium px-6 py-2.5 gap-3 hover:bg-[#5c6bc077]  text-paragraph transition-colors rounded-full h-fit">
                 <Share2 size={13} className="inline-block" /> Share
               </button>
             </div>
@@ -116,7 +157,7 @@ const ConferenceDetails = () => {
             {superscriptifyAllNumbers(activePaper?.designation ?? "")}
           </h2>
           {/* <h3 className="font-medium">Published Online: {activePaper?.created_at.split("T")[0]}</h3> */}
-          <h3 className="font-medium">Published Online: {activePaper.year && activePaper.month? `${activePaper.month} ${activePaper.year}`:new Date(activePaper.updated_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</h3>
+          <h3 className="font-medium">Published Online: {activePaper.year && activePaper.month ? `${activePaper.month} ${activePaper.year}` : new Date(activePaper.updated_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</h3>
           <h3 className="font-medium">Pages: {activePaper?.pages}</h3>
         </div>
 
@@ -138,7 +179,7 @@ const ConferenceDetails = () => {
             }
           </div>
 
-          <button className="inline-flex sm:hidden items-center justify-center bg-[#A52A2A1A] text-primary-text text-sm xl:text-base 2xl:text-lg font-medium w-12 h-12 hover:bg-[#cc282846] transition-colors rounded-full">
+          <button onClick={() => setShowSharePopup(true)} className="inline-flex sm:hidden items-center justify-center bg-[#5C6BC01A] text-primary-text text-sm xl:text-base 2xl:text-lg font-medium w-12 h-12 hover:bg-[#5c6bc077] transition-colors rounded-full">
             <Share2 size={13} className="inline-block" />
           </button>
 
@@ -154,14 +195,8 @@ const ConferenceDetails = () => {
             </span>
           </div>
 
-          <button className={`hidden sm:inline-flex items-center justify-center ${copy ? "bg-green-300 hover:bg-green-400" : "bg-[#A52A2A1A] hover:bg-[#cc282846]"} text-primary-text text-sm xl:text-base 2xl:text-lg font-medium w-12 h-12  xl:h-16 xl:w-16 transition-colors rounded-full`} onClick={() => {
-            navigator.clipboard.writeText(window.location.href)
-            SetCopy(true)
-            setTimeout(() => {
-              SetCopy(false)
-            }, 2000)
-          }}>
-            {!copy ? <Share2 size={13} className="inline-block xl:scale-150" /> : <MdDone size={13} className="inline-block xl:scale-150" />}
+          <button className={`hidden sm:inline-flex items-center justify-center bg-[#5C6BC01A] hover:bg-[#5c6bc077] text-primary-text text-sm xl:text-base 2xl:text-lg font-medium w-12 h-12  xl:h-16 xl:w-16 transition-colors rounded-full`} onClick={() => setShowSharePopup(true)} >
+            <Share2 size={13} className="inline-block xl:scale-150" />
 
           </button>
         </div>
@@ -185,7 +220,12 @@ const ConferenceDetails = () => {
             )
           )}
         </div>
-
+        <SharePopup
+          isOpen={showSharePopup}
+          onClose={() => setShowSharePopup(false)}
+          url={window.location.href}
+          title={activePaper?.title || "Article"}
+        />
         {currentItem === "FullArticle" && <FullArtical content={activePaper?.abstract ?? ""} pdf_url={activePaper?.pdf_url ?? ""} />}
         {currentItem === "Citations" && <Citations content={activePaper?.citation ?? ""} />}
         {currentItem === "Licensing" && <Licensing />}
@@ -196,7 +236,7 @@ const ConferenceDetails = () => {
         <RelatedArticles />
       </div>
       <script async src="https://badge.dimensions.ai/badge.js"></script>
-      
+
     </MetaDataWrapper>
 
   );

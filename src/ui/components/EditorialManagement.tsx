@@ -36,7 +36,7 @@ const editorialData = [
 
 export default function EditorialManagement() {
   return (
-    <section className="pt-8  px-6 lg:px-16 ">
+    <section className=" px-6 lg:px-16 ">
       <div className=" mb-10">
         {/* <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-2">
           Advanced Editorial Management

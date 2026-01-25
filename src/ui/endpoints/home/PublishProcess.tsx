@@ -54,7 +54,7 @@ export default function PublishProcess() {
         <p className="mt-2 text-sm 2xl:text-base text-secondaryText">Our efficient workflow ensures your research gets published quickly without sacrificing quality</p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-4 gap-y-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-x-4 gap-y-4">
         {steps.map((step, idx) => (
           <div key={idx} className="flex flex-col items-start space-y-4 max-w-96 xl:max-w-full mx-auto ">
             <img loading='lazy'

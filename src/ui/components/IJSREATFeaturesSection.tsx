@@ -16,10 +16,10 @@ const features = [
 
 export default function IJSREATFeaturesSection() {
   return (
-    <section className="bg-white pt-4 px-6 lg:px-16">
+    <section className="bg-white pt-4 px-4 -ml-2 md:-ml-4 lg:-ml-6">
 
       {/* Features + Illustration */}
-      <div className="grid md:grid-cols-2 items-center gap-10">
+      <div className="grid md:grid-cols-2 items-start gap-10">
         {/* Features List */}
         <div>
           {/* <h2 className="text-2xl md:text-3xl font-semibold text-dark mb-4">INDJCST Features</h2> */}
