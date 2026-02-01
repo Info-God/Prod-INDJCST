@@ -47,7 +47,7 @@ const RelatedArticles = () => {
               </p>
             </div>
             <div className="mt-4">
-              <button className="primaryBtn " onClick={() => navigate(endpoint(article.paper_id, article.paper_title))}>
+              <button className="primaryBtnLight " onClick={() => navigate(endpoint(article.paper_id, article.paper_title))}>
                 <span className="text-sm xl:text-base 2xl:text-lg">View More</span><ArrowUpRight size={16} />
               </button>
             </div>

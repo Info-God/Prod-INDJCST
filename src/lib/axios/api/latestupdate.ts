@@ -18,3 +18,24 @@ export const fetchUpdates = async ():Promise<latestUpdate> => {
         throw new Error(`Failed to fetch archive: ${error}`);
     }
 }
+
+export const fetchLatestPublicationsForHome = async () => {
+    try {
+        const response = await axiosClient.post("/archiveYearListingForHome");
+        return response.data; 
+    } catch (error) {
+        console.error("Failed to fetch latest publications:", error);
+        return { archives: [], papers: [] };
+    }
+}
+
+
+export const fetchArchivesForHome = async () => {
+  try {
+    const response = await axiosClient.post("/archiveYearListingForHome");
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch archives:", error);
+    throw error;
+  }
+}
