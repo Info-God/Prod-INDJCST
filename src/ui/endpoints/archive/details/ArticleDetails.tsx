@@ -106,20 +106,6 @@ const ArticleDetails = () => {
             </h2>
           </div>
         </div>
-        {papers.length > 0 && currentIndex !== -1 && (
-          <div className="flex items-center justify-between">
-            {currentIndex > 0 && (
-              <button className="primaryBtn" onClick={handlePreviousPage}>
-                <ArrowLeft /> Previous
-              </button>
-            )}
-
-            {currentIndex < papers.length - 1 && (
-              <button className="ml-auto primaryBtn" onClick={handleNextPage}>
-                Next <ArrowRight />
-              </button>
-            )}
-          </div>)}
         {/* Meta Information */}
         <div className="space-y-3 text-primary-text leading-relaxed text-sm xl:text-base 2xl:text-lg sm:text-base">
           <div className="flex gap-3 ">
@@ -217,11 +203,31 @@ const ArticleDetails = () => {
         />
         <div className="2xl:text-lg">
 
-          {currentItem === "FullArticle" && <FullArtical content={activePaper?.paper_abstract ?? ""} pdf_url={activePaper?.paper_url ?? ""} />}
+          {currentItem === "FullArticle" &&(
+          <>
+          <FullArtical content={activePaper?.paper_abstract ?? ""} pdf_url={activePaper?.paper_url ?? ""} />
+           {papers.length > 0 && currentIndex !== -1 && (
+          <div className="flex items-center justify-between">
+            {currentIndex > 0 && (
+              <button className="mt-6 inline-flex items-center gap-3 bg-[#A52A2A1A] hover:bg-[#cc282846] rounded-md text-primary-text text-sm 2xl:text-base font-medium px-6 py-2  transition-colors;" onClick={handlePreviousPage}>
+                <ArrowLeft /> Previous
+              </button>
+            )}
+
+            {currentIndex < papers.length - 1 && (
+              <button className="ml-auto 
+              mt-6 inline-flex items-center gap-3 bg-[#A52A2A1A] hover:bg-[#cc282846] rounded-md text-primary-text text-sm 2xl:text-base font-medium px-6 py-2 transition-colors;" onClick={handleNextPage}>
+                Next <ArrowRight />
+              </button>
+            )}
+          </div>
+        )}
+        </>
+          )}
           {currentItem === "Citations" && <Citations content={activePaper?.paper_citation ?? ""} />}
           {currentItem === "Licensing" && <Licensing />}
           {/* <div className={`${currentItem === "Metrics"?"":"absolute -z-10"}`}><ArticleMetrics /></div> */}
-          {currentItem === "Metrics" && <ArticleMetrics content={activePaper.paper_doi} />}
+          {currentItem === "Metrics" && <ArticleMetrics content={activePaper.paper_doi}   paperId={activePaper.paper_id}/>}
           {currentItem === "References" && <References content={activePaper?.paper_references ?? ""} />}
           <RelatedArticles />
         </div>

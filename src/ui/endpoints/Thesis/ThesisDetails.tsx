@@ -107,20 +107,7 @@ const ThesisDetails = () => {
           </div>
         </div>
 
-        {papers.length > 0 && currentIndex !== -1 && (
-          <div className="flex items-center justify-between">
-            {currentIndex > 0 && (
-              <button className="primaryBtn" onClick={handlePreviousPage}>
-                <ArrowLeft /> Previous
-              </button>
-            )}
-
-            {currentIndex < papers.length - 1 && (
-              <button className="ml-auto primaryBtn" onClick={handleNextPage}>
-                Next <ArrowRight />
-              </button>
-            )}
-          </div>)}
+        
 
         {/* Meta Information */}
         <div className="space-y-3 text-primary-text leading-relaxed text-sm xl:text-base 2xl:text-lg sm:text-base">
@@ -230,10 +217,30 @@ const ThesisDetails = () => {
           url={window.location.href}
           title={activePaper?.title || "Article"}
         />
-        {currentItem === "FullArticle" && <FullArtical content={activePaper?.abstract ?? ""} pdf_url={activePaper?.paper_url ?? ""} />}
+        {currentItem === "FullArticle" &&(
+          <>
+          <FullArtical content={activePaper?.abstract ?? ""} pdf_url={activePaper?.paper_url ?? ""} />
+           {papers.length > 0 && currentIndex !== -1 && (
+          <div className="flex items-center justify-between">
+            {currentIndex > 0 && (
+              <button className="mt-6 inline-flex items-center gap-3 bg-[#A52A2A1A] hover:bg-[#cc282846]rounded-md text-primary-text text-sm 2xl:text-base font-medium px-6 py-2  transition-colors;" onClick={handlePreviousPage}>
+                <ArrowLeft /> Previous
+              </button>
+            )}
+
+            {currentIndex < papers.length - 1 && (
+              <button className="ml-auto 
+              mt-6 inline-flex items-center gap-3 bg-[#A52A2A1A] hover:bg-[#cc282846]rounded-md text-primary-text text-sm 2xl:text-base font-medium px-6 py-2  transition-colors;" onClick={handleNextPage}>
+                Next <ArrowRight />
+              </button>
+            )}
+          </div>
+        )}
+        </>
+          )}
         {currentItem === "Citations" && <Citations content={activePaper?.citation ?? ""} />}
         {currentItem === "Licensing" && <Licensing />}
-        {currentItem === "Metrics" && <ArticleMetrics content={activePaper?.doi_no ?? ""} />}
+        {currentItem === "Metrics" && <ArticleMetrics content={activePaper?.doi_no ?? ""} paperId={activePaper.id}  />}
         {/* <div className={`${currentItem === "Metrics" ? "" : "absolute -z-10"}`}><ArticleMetrics /></div> */}
 
         {currentItem === "References" && <References content={activePaper?.reference ?? ""} />}

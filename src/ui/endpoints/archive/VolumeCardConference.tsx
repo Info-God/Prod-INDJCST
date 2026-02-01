@@ -42,6 +42,7 @@ export default function VolumeCardConference({ paper, setActive, navigate }: { p
                 })}
                 <br />
                  <span className="font-bold">Article Type : </span> {paper.article_type}
+                 <br/>
                 <span className="font-bold">Published Online : </span> {paper.year && paper.month? `${paper.month} ${paper.year}`:new Date(paper.updated_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
                 <br />
                 <span className="font-bold">Pages : </span> {paper.pages}

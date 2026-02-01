@@ -1,12 +1,28 @@
 import useDimensionsBadge from "../../../components/cards/plumx/useDimensionsBadge";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../../../../lib/store/store";
+import { fetchPaperViewsThunk } from "../../../../lib/store/Features/ArchiveSlice";
 
-const ArticleMetrics = ({ content }: { content?: string }) => {
-  const metrics = [
-    { label: "Views", value: "216", to: "to-cyan-700", from: "from-cyan-500" },
-    { label: "Citations", value: "0", to: "to-red-700", from: "from-red-500" },
-  ];
+  const ArticleMetrics = ({ content, paperId }: { content?: string, paperId?: number }) => {
+  const dispatch = useDispatch();
+  const paperViews = useSelector((state: RootState) =>
+    paperId ? state.archiveSection?.paperViews?.[paperId] : null
+  );
   const doi = content!==undefined ? content.split("https://www.doi.org/")[1]: ""
   useDimensionsBadge()
+
+  useEffect(() => {
+    if (paperId) {
+      (dispatch as any)(fetchPaperViewsThunk(paperId));
+    }
+  }, [dispatch, paperId]);
+
+  const metrics = [
+    {label: "Views",value: paperViews?.isLoading ? "..." : (paperViews?.total_views || 0).toString(),to: "to-cyan-700", from: "from-cyan-500"},
+    {label: "Citations",value: "0",to: "to-red-700",from: "from-red-500" },
+  ];
+
   return (
     <div className="min-h-72">
       <h2 className="text-base xl:text-xl 2xl:text-3xl font-semibold text-gray-700 mb-6">Article Metrics</h2>
