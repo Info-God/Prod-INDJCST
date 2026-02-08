@@ -147,7 +147,7 @@ export default function GuidePaper() {
           <span className="font-medium text-lg 2xl:text-xl pr-2">Text Formatting:</span> Paper Setup must be in A4 size with Margin: Top 1.78 cm, Bottom 1.78 cm, Left 1.78 cm, Right 1.65 cm. Paper must be in one Column after Authors
           Name with Width 8.59 cm, Spacing 0.51 cm. Whole paper must be with: Font Name
           Cambria, Font Size 10, Line Spacing 1.05 Except Abstract, Keywords (Index Term),
-          Paper Tile, References, Author Profile (in the last page of the paper, maximum 400
+          Paper Title, References, Author Profile (in the last page of the paper, maximum 400
           words), All Headings, and Manuscript Details (First Page, Bottom, left side).Paper
           Title must be in Font Size 24, Bold, with Single Line Spacing. Authors Name must be
           in Font Size 11, Bold, Before Spacing 0, After Spacing 16, with Single Line Spacing.
