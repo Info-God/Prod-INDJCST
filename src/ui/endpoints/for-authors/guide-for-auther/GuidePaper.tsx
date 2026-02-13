@@ -307,7 +307,7 @@ export default function GuidePaper() {
         </div>
       </section>
       <section>
-        <h2 className="font-medium text-lg xl:text-xl 2xl:text-2xl mb-2 text-red-500">Article Page Limit </h2>
+        <h2 className="font-medium text-lg xl:text-xl 2xl:text-2xl mb-2 ">Article Page Limit </h2>
         <p className="mb-4">
           To maintain publication quality and standardization, the journal requires that all submitted research articles comply with the prescribed page limit.
         </p>
