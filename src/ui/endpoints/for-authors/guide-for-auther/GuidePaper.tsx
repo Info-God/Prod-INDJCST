@@ -312,7 +312,7 @@ export default function GuidePaper() {
           To maintain publication quality and standardization, the journal requires that all submitted research articles comply with the prescribed page limit.
         </p>
         <div>
-            <h2 className="font-medium text-lg xl:text-xl 2xl:text-2xl mb-2">Article Length Requirement</h2>
+            <p className="mb-2"><b>Article Length Requirement</b></p>
              <ul className="list-disc ml-10 space-y-1">
               <li className="pl-2 list-disc mt-4"> Maximum Length:<b> 15-20 Pages</b></li>
               <li className="pl-2 list-disc mt-2 mb-2"> Page count includes: </li>
