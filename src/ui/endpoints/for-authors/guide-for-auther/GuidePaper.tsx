@@ -306,6 +306,51 @@ export default function GuidePaper() {
           </p>
         </div>
       </section>
+      <section>
+        <h2 className="font-medium text-lg xl:text-xl 2xl:text-2xl mb-2 text-red-500">Article Page Limit </h2>
+        <p className="mb-4">
+          To maintain publication quality and standardization, the journal requires that all submitted research articles comply with the prescribed page limit.
+        </p>
+        <div>
+            <h2 className="font-medium text-lg xl:text-xl 2xl:text-2xl mb-2">Article Length Requirement</h2>
+             <ul className="list-disc ml-10 space-y-1">
+              <li className="pl-2 list-disc mt-4"> Maximum Length: 15-20 Pages</li>
+              <li className="pl-2 list-disc mt-2 mb-2"> Page count includes: </li>
+             </ul>
+             <ul className="list-disc pl-5 space-y-1">
+              <li className="ml-12 sm:ml-24 mb-2">
+              Title and Author Details
+              </li>
+              <li className="ml-12 sm:ml-24 mb-2">
+               Abstract and Keywords 
+              </li>
+              <li className="ml-12 sm:ml-24 mb-2">
+              	Main Content (Introduction to Conclusion)
+              </li>
+              <li className="ml-12 sm:ml-24 mb-2">
+               Figures, Tables, and Captions
+              </li>
+              <li className="ml-12 sm:ml-24 mb-2">
+               References
+              </li>
+              <li className="ml-12 sm:ml-24 mb-2">
+               Appendices (if applicable)
+              </li>
+             </ul>
+        </div>
+        <div>
+          <h2 className="font-medium text-lg xl:text-xl 2xl:text-2xl mb-2">Important Guidelines</h2>
+        
+        <ol className="list-decimal pl-5 space-y-1 ml-6 mb-6">
+        <li>Manuscripts exceeding 20 pages will be returned to authors for reduction.</li>
+        <li>Authors must use the official journal template.</li>
+        <li>All submissions must follow formatting and referencing guidelines.</li>
+        <li>Plagiarism should be within acceptable limits as per journal policy.</li>
+        </ol>
+        </div>
+        <p className="mb-2">Failure to comply with the page limit requirement may result in processing delay or rejection. </p>
+        <p>We request authors to carefully review the Instructions for Authors before submission.</p>
+      </section>
     </article>
   )
 }
