@@ -314,7 +314,7 @@ export default function GuidePaper() {
         <div>
             <h2 className="font-medium text-lg xl:text-xl 2xl:text-2xl mb-2">Article Length Requirement</h2>
              <ul className="list-disc ml-10 space-y-1">
-              <li className="pl-2 list-disc mt-4"> Maximum Length: 15-20 Pages</li>
+              <li className="pl-2 list-disc mt-4"> Maximum Length:<b> 15-20 Pages</b></li>
               <li className="pl-2 list-disc mt-2 mb-2"> Page count includes: </li>
              </ul>
              <ul className="list-disc pl-5 space-y-1">
@@ -342,7 +342,7 @@ export default function GuidePaper() {
           <h2 className="font-medium text-lg xl:text-xl 2xl:text-2xl mb-2">Important Guidelines</h2>
         
         <ol className="list-decimal pl-5 space-y-1 ml-6 mb-6">
-        <li>Manuscripts exceeding 20 pages will be returned to authors for reduction.</li>
+        <li>Manuscripts exceeding <b>20 pages</b> will be returned to authors for reduction.</li>
         <li>Authors must use the official journal template.</li>
         <li>All submissions must follow formatting and referencing guidelines.</li>
         <li>Plagiarism should be within acceptable limits as per journal policy.</li>
