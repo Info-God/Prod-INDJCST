@@ -167,7 +167,9 @@ const ArticleDetails = () => {
               </PrimaryBtn>
             </Link>
             <span aria-label="link" className="hover:scale-105 transition-all text-dark rounded-md font-semibold flex items-center justify-center space-x-3 text-sm xl:text-base 2xl:text-lg">
+             <Link aria-label="link" target="_blank" rel="noreferrer" to="https://crossmark.crossref.org/dialog/?doi=10.59256/indjcst/CrossMark-Policy-Page&domain=pdf">
               <img loading="lazy" src="/checkupdate.webp" alt=" check update" width={180} />
+              </Link>
             </span>
           </div>
 
